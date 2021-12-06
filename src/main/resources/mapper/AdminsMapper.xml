@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="beautiful.back.bb.mapper.AdminsMapper">
+  <resultMap id="BaseResultMap" type="beautiful.back.bb.entry.Admins">
+    <id column="Ano" jdbcType="VARCHAR" property="ano" />
+    <result column="Aname" jdbcType="VARCHAR" property="aname" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Ano, Aname, `Password`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admins
+    where Ano = #{ano,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from admins
+    where Ano = #{ano,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="Ano" keyProperty="ano" parameterType="beautiful.back.bb.entry.Admins" useGeneratedKeys="true">
+    insert into admins (Aname, `Password`)
+    values (#{aname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="Ano" keyProperty="ano" parameterType="beautiful.back.bb.entry.Admins" useGeneratedKeys="true">
+    insert into admins
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aname != null">
+        Aname,
+      </if>
+      <if test="password != null">
+        `Password`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aname != null">
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="beautiful.back.bb.entry.Admins">
+    update admins
+    <set>
+      <if test="aname != null">
+        Aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `Password` = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Ano = #{ano,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="beautiful.back.bb.entry.Admins">
+    update admins
+    set Aname = #{aname,jdbcType=VARCHAR},
+      `Password` = #{password,jdbcType=VARCHAR}
+    where Ano = #{ano,jdbcType=VARCHAR}
+  </update>
+</mapper>

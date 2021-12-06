@@ -1,0 +1,75 @@
+create table major(
+                      Mno	varchar(20) primary key not null ,
+                      Mname	varchar(15) not null
+);
+create table teachers(
+                         Tno	varchar(20)	not null primary key ,
+                         Tname varchar(15)	not null,
+                         Mno varchar(20)	not null,
+                         Password varchar(30)	not null,
+                         foreign key (Mno) references major(Mno)
+);
+create table class(
+                      CLno varchar(20) not null,
+                      CLname	varchar(15) not null ,
+                      Mno	varchar(20) not null ,
+                      Tno	varchar(20) not null ,
+                      foreign key (Mno) references major(Mno),
+                      foreign key (Tno) references teachers(Tno),
+                      constraint   PK_class   primary   key(CLno,CLname)
+
+);
+create table course (
+                        Cno varchar(20) not null primary key ,
+                        Cstatus	int not null ,
+                        Cname varchar(50) not null ,
+                        Teacher	varchar(20) not null ,
+                        Type int not null ,
+                        Info varchar(15) not null ,
+                        CLno	varchar(20) not null,
+                        foreign key (CLno) references class (CLno)
+);
+
+create table students(
+                         Sno	varchar(20) not null primary key ,
+                         Sname	varchar(15) not null ,
+                         clno	varchar(20) not null ,
+                         Password varchar(30) not null ,
+                         Imgpath	varchar(255) not null ,
+                         Mno	varchar(20) not null ,
+                         foreign key (clno) references class(clno),
+                         foreign key (Mno) references major(Mno)
+);
+create table admins(
+                       Ano	varchar(20)	not null primary key,
+                       Aname	varchar(15)	not null,
+                       Password varchar(30) not null
+);
+
+create table attend(
+                       Atno	varchar(20)	not null primary key ,
+                       Cno	varchar(20)	not null,
+                       Tno	varchar(20)	not null,
+                       Remarks	varchar(255),
+                       Status	int	not null,
+                       startdate	date	not null,
+                       enddate	date	not null,
+                       foreign key (Cno) references course(Cno),
+                       foreign key (Tno) references teachers(Tno)
+);
+create table record(
+                       Rno	int primary key auto_increment,
+                       Atno	varchar(20)	not null,
+                       Sno	varchar(20)	not null,
+                       Date	date	not null,
+                       Type	int	not null,
+                       foreign key (Sno)references students(Sno),
+                       foreign key (Atno) references attend(Atno)
+);
+//select * from major;
+insert into major values ('114514','软工');
+insert into teachers values ('112','陽樂','114514','123456');
+select * from teachers;
+alter table class add foreign key (Tno) references teachers(Tno);
+insert into class values ('1234','1','114514','112');
+select * from class
