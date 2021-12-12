@@ -1,71 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.StudentsMapper">
-  <resultMap id="BaseResultMap" type="beautiful.back.bb.entry.Students">
-    <id column="Ano" jdbcType="VARCHAR" property="ano" />
-    <result column="Aname" jdbcType="VARCHAR" property="aname" />
-    <result column="Password" jdbcType="VARCHAR" property="password" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    Ano, Aname, `Password`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from admins
-    where Ano = #{ano,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from admins
-    where Ano = #{ano,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="beautiful.back.bb.entry.Students">
-    insert into admins (Ano, Aname, `Password`
-      )
-    values (#{ano,jdbcType=VARCHAR}, #{aname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="beautiful.back.bb.entry.Students">
-    insert into admins
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ano != null">
-        Ano,
-      </if>
-      <if test="aname != null">
-        Aname,
-      </if>
-      <if test="password != null">
-        `Password`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ano != null">
-        #{ano,jdbcType=VARCHAR},
-      </if>
-      <if test="aname != null">
-        #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="beautiful.back.bb.entry.Students">
-    update admins
-    <set>
-      <if test="aname != null">
-        Aname = #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `Password` = #{password,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where Ano = #{ano,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="beautiful.back.bb.entry.Students">
-    update admins
-    set Aname = #{aname,jdbcType=VARCHAR},
-      `Password` = #{password,jdbcType=VARCHAR}
-    where Ano = #{ano,jdbcType=VARCHAR}
-  </update>
+
+<!--    <resultMap id="BaseResultMap" type="..Students">-->
+<!--            <id property="sno" column="Sno" jdbcType="VARCHAR"/>-->
+<!--            <result property="sname" column="Sname" jdbcType="VARCHAR"/>-->
+<!--            <result property="clno" column="clno" jdbcType="VARCHAR"/>-->
+<!--            <result property="password" column="Password" jdbcType="VARCHAR"/>-->
+<!--            <result property="imgpath" column="Imgpath" jdbcType="VARCHAR"/>-->
+<!--            <result property="mno" column="Mno" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+<!--    <sql id="Base_Column_List">-->
+<!--        Sno,Sname,clno,-->
+<!--        Password,Imgpath,Mno-->
+<!--    </sql>-->
 </mapper>
