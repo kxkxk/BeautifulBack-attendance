@@ -8,9 +8,15 @@
             <id property="mno" column="Mno" jdbcType="VARCHAR"/>
             <result property="mname" column="Mname" jdbcType="VARCHAR"/>
     </resultMap>
+    <insert id="insertMajor">
+        insert into major values (#{mno},#{mname})
+    </insert>
     <update id="updateMnameByMnoInt">
         update major set mname = #{newMname} where mno = #{mno}
     </update>
+    <delete id="deleteByMno">
+        delete from major where Mno = #{mno}
+    </delete>
 
     <select id="getAllMajor" resultType="beautiful.back.bb.entry.Major">
         select * from major

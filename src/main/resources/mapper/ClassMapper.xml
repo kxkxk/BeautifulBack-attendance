@@ -4,15 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.ClassMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Class">-->
-<!--            <id property="clno" column="CLno" jdbcType="VARCHAR"/>-->
-<!--            <id property="clname" column="CLname" jdbcType="VARCHAR"/>-->
-<!--            <result property="mno" column="Mno" jdbcType="VARCHAR"/>-->
-<!--            <result property="tno" column="Tno" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
-
-<!--    <sql id="Base_Column_List">-->
-<!--        CLno,CLname,Mno,-->
-<!--        Tno-->
-<!--    </sql>-->
+    <insert id="insertClass">
+        insert into class values (#{clno},#{clname},${mno},#{tno})
+    </insert>
+    <update id="updataTnoByClno">
+        update class set Tno = #{tno} where clno = #{clno}
+    </update>
+    <update id="updataMnoByClno">
+        update class set Mno = #{mno} where clno = #{clno}
+    </update>
+    <delete id="deleteClassByClno">
+        delete from class where CLno = #{clno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Class">
+        select * from class
+    </select>
+    <select id="selectClassByClno" resultType="beautiful.back.bb.entry.Class">
+        select * from class where CLno = #{clno}
+    </select>
+    <select id="selectClassByTno" resultType="beautiful.back.bb.entry.Class">
+        select * from class where Tno = #{tno}
+    </select>
+    <select id="selectClassByMno" resultType="beautiful.back.bb.entry.Class">
+        select * from class where Mno = #{mno}
+    </select>
 </mapper>

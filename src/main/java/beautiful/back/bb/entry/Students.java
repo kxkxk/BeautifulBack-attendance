@@ -40,6 +40,54 @@ public class Students implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     *
+     * @param sno
+     * @param sname
+     * @param clno
+     * @param password
+     * @param imgpath
+     * @param mno
+     */
+    public Students(String sno, String sname, String clno, String password, String imgpath, String mno) {
+        this.sno = sno;
+        this.sname = sname;
+        this.clno = clno;
+        this.password = password;
+        this.imgpath = imgpath;
+        this.mno = mno;
+    }
+
+    /**
+     *
+     * @param sno
+     * @param sname
+     * @param clno
+     * @param imgpath
+     * @param mno
+     */
+    public Students(String sno, String sname, String clno, String imgpath, String mno) {
+        this.sno = sno;
+        this.sname = sname;
+        this.clno = clno;
+        this.imgpath = imgpath;
+        this.mno = mno;
+    }
+
+    /**
+     *
+     * @param sno
+     * @param sname
+     * @param clno
+     * @param mno
+     */
+    public Students(String sno, String sname, String clno, String mno) {
+        this.sno = sno;
+        this.sname = sname;
+        this.clno = clno;
+        this.mno = mno;
+    }
+
+    /**
      * 
      */
     public String getSno() {

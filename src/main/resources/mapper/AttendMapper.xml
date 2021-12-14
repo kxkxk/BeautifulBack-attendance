@@ -4,19 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.AttendMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Attend">-->
-<!--            <id property="atno" column="Atno" jdbcType="VARCHAR"/>-->
-<!--            <result property="cno" column="Cno" jdbcType="VARCHAR"/>-->
-<!--            <result property="tno" column="Tno" jdbcType="VARCHAR"/>-->
-<!--            <result property="remarks" column="Remarks" jdbcType="VARCHAR"/>-->
-<!--            <result property="status" column="Status" jdbcType="INTEGER"/>-->
-<!--            <result property="startdate" column="startdate" jdbcType="DATE"/>-->
-<!--            <result property="enddate" column="enddate" jdbcType="DATE"/>-->
-<!--    </resultMap>-->
+    <insert id="insertAttend">
+        insert into attend values (#{atno},#{cno},#{tno},#{remarks},#{status},#{startdate},#{enddate},#{cstatus})
+    </insert>
+    <update id="updateStatusByAtno">
+        update attend set Status = #{status} where atno = #{atno}
+    </update>
+    <update id="updateRemarksByAtnoInt">
+        update attend set Remarks = #{remarks} where atno = #{atno}
+    </update>
+    <delete id="delAttendByAtno">
+        delete from attend where Atno = #{atno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Attend">
+        select * from attend
+    </select>
+    <select id="selectRunningAttend" resultType="beautiful.back.bb.entry.Attend">
+        select * from attend where Status = 1
+    </select>
+    <select id="selectAttendByTno" resultType="beautiful.back.bb.entry.Attend">
+        select * from attend where Tno = #{tno}
+    </select>
+    <select id="selectAttendByCno" resultType="beautiful.back.bb.entry.Attend">
+        select * from attend where Cno = #{cno}
+    </select>
 
-<!--    <sql id="Base_Column_List">-->
-<!--        Atno,Cno,Tno,-->
-<!--        Remarks,Status,startdate,-->
-<!--        enddate-->
-<!--    </sql>-->
+
 </mapper>

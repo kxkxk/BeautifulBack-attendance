@@ -4,14 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.AdminsMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Admins">-->
-<!--            <id property="ano" column="Ano" jdbcType="VARCHAR"/>-->
-<!--            <result property="aname" column="Aname" jdbcType="VARCHAR"/>-->
-<!--            <result property="password" column="Password" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
+    <resultMap id="BaseResultMap" type="beautiful.back.bb.entry.Admins">
+            <id property="ano" column="Ano" jdbcType="VARCHAR"/>
+            <result property="aname" column="Aname" jdbcType="VARCHAR"/>
+            <result property="password" column="Password" jdbcType="VARCHAR"/>
+    </resultMap>
 
-<!--    <sql id="Base_Column_List">-->
-<!--        Ano,Aname,Password-->
-<!--    </sql>-->
-
+    <insert id="insertAdmin">
+        insert into admins values (#{ano},#{aname},#{password})
+    </insert>
+    <update id="updatePas">
+        update admins set Password = #{password} where Ano = #{ano}
+    </update>
+    <delete id="deleteAdmin">
+        delete from admins where Ano = #{ano}
+    </delete>
+    <select id="selectAllInfo" resultType="beautiful.back.bb.entry.Admins">
+        select  (Ano,Aname) from admins
+    </select>
+    <select id="selectAdminByAno" resultType="beautiful.back.bb.entry.Admins">
+        select Aname from admins where Ano = #{ano}
+    </select>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Admins">
+        select * from admins
+    </select>
 </mapper>

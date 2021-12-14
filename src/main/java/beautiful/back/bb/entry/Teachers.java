@@ -31,6 +31,32 @@ public class Teachers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     *
+     * @param tno
+     * @param tname
+     * @param mno
+     * @param password
+     */
+    public Teachers(String tno, String tname, String mno, String password) {
+        this.tno = tno;
+        this.tname = tname;
+        this.mno = mno;
+        this.password = password;
+    }
+
+    /**
+     *
+     * @param tno
+     * @param tname
+     * @param mno
+     */
+    public Teachers(String tno, String tname, String mno) {
+        this.tno = tno;
+        this.tname = tname;
+        this.mno = mno;
+    }
+
+    /**
      * 
      */
     public String getTno() {

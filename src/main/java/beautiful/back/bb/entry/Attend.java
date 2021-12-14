@@ -10,138 +10,179 @@ import java.util.Date;
  */
 public class Attend implements Serializable {
     /**
-     * 
+     *
      */
     private String atno;
 
     /**
-     * 
+     *
      */
     private String cno;
 
     /**
-     * 
+     *
      */
     private String tno;
 
     /**
-     * 
+     *
      */
     private String remarks;
 
     /**
-     * 
+     *
      */
     private Integer status;
 
     /**
-     * 
+     *
      */
     private Date startdate;
 
     /**
-     * 
+     *
      */
     private Date enddate;
+
+    /**
+     *
+     */
+    private Integer cstatus;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
+     * @param atno
+     * @param cno
+     * @param tno
+     * @param remarks
+     * @param status
+     * @param startdate
+     * @param enddate
+     * @param cstatus
+     */
+    public Attend(String atno, String cno, String tno, String remarks, Integer status, Date startdate, Date enddate, Integer cstatus) {
+        this.atno = atno;
+        this.cno = cno;
+        this.tno = tno;
+        this.remarks = remarks;
+        this.status = status;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.cstatus = cstatus;
+    }
+
+    /**
+     *
      */
     public String getAtno() {
         return atno;
     }
 
     /**
-     * 
+     *
      */
     public void setAtno(String atno) {
         this.atno = atno;
     }
 
     /**
-     * 
+     *
      */
     public String getCno() {
         return cno;
     }
 
     /**
-     * 
+     *
      */
     public void setCno(String cno) {
         this.cno = cno;
     }
 
     /**
-     * 
+     *
      */
     public String getTno() {
         return tno;
     }
 
     /**
-     * 
+     *
      */
     public void setTno(String tno) {
         this.tno = tno;
     }
 
     /**
-     * 
+     *
      */
     public String getRemarks() {
         return remarks;
     }
 
     /**
-     * 
+     *
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
 
     /**
-     * 
+     *
      */
     public Integer getStatus() {
         return status;
     }
 
     /**
-     * 
+     *
      */
     public void setStatus(Integer status) {
         this.status = status;
     }
 
     /**
-     * 
+     *
      */
     public Date getStartdate() {
         return startdate;
     }
 
     /**
-     * 
+     *
      */
     public void setStartdate(Date startdate) {
         this.startdate = startdate;
     }
 
     /**
-     * 
+     *
      */
     public Date getEnddate() {
         return enddate;
     }
 
     /**
-     * 
+     *
      */
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
+    }
+
+    /**
+     *
+     */
+    public Integer getCstatus() {
+        return cstatus;
+    }
+
+    /**
+     *
+     */
+    public void setCstatus(Integer cstatus) {
+        this.cstatus = cstatus;
     }
 
     @Override
@@ -157,12 +198,13 @@ public class Attend implements Serializable {
         }
         Attend other = (Attend) that;
         return (this.getAtno() == null ? other.getAtno() == null : this.getAtno().equals(other.getAtno()))
-            && (this.getCno() == null ? other.getCno() == null : this.getCno().equals(other.getCno()))
-            && (this.getTno() == null ? other.getTno() == null : this.getTno().equals(other.getTno()))
-            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getStartdate() == null ? other.getStartdate() == null : this.getStartdate().equals(other.getStartdate()))
-            && (this.getEnddate() == null ? other.getEnddate() == null : this.getEnddate().equals(other.getEnddate()));
+                && (this.getCno() == null ? other.getCno() == null : this.getCno().equals(other.getCno()))
+                && (this.getTno() == null ? other.getTno() == null : this.getTno().equals(other.getTno()))
+                && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()))
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getStartdate() == null ? other.getStartdate() == null : this.getStartdate().equals(other.getStartdate()))
+                && (this.getEnddate() == null ? other.getEnddate() == null : this.getEnddate().equals(other.getEnddate()))
+                && (this.getCstatus() == null ? other.getCstatus() == null : this.getCstatus().equals(other.getCstatus()));
     }
 
     @Override
@@ -176,6 +218,7 @@ public class Attend implements Serializable {
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getStartdate() == null) ? 0 : getStartdate().hashCode());
         result = prime * result + ((getEnddate() == null) ? 0 : getEnddate().hashCode());
+        result = prime * result + ((getCstatus() == null) ? 0 : getCstatus().hashCode());
         return result;
     }
 
@@ -192,6 +235,7 @@ public class Attend implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", startdate=").append(startdate);
         sb.append(", enddate=").append(enddate);
+        sb.append(", cstatus=").append(cstatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

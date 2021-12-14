@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @TableName admins
  */
 public class Admins implements Serializable {
+
     /**
      * 
      */
@@ -24,6 +25,28 @@ public class Admins implements Serializable {
     private String password;
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     * @param ano
+     * @param aname
+     */
+    public Admins(String ano, String aname) {
+        this.ano = ano;
+        this.aname = aname;
+    }
+
+    /**
+     *
+     * @param ano
+     * @param aname
+     * @param password
+     */
+    public Admins(String ano, String aname, String password) {
+        this.ano = ano;
+        this.aname = aname;
+        this.password = password;
+    }
 
     /**
      * 

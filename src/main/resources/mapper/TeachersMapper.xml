@@ -3,16 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.TeachersMapper">
-
-<!--    <resultMap id="BaseResultMap" type="..Teachers">-->
-<!--            <id property="tno" column="Tno" jdbcType="VARCHAR"/>-->
-<!--            <result property="tname" column="Tname" jdbcType="VARCHAR"/>-->
-<!--            <result property="mno" column="Mno" jdbcType="VARCHAR"/>-->
-<!--            <result property="password" column="Password" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
-
-<!--    <sql id="Base_Column_List">-->
-<!--        Tno,Tname,Mno,-->
-<!--        Password-->
-<!--    </sql>-->
+    <resultMap id="BaseResultMap" type="beautiful.back.bb.entry.Teachers">
+    <id property="tno" column="Tno" jdbcType="VARCHAR"/>
+    <result property="tname" column="Tname" jdbcType="VARCHAR"/>
+    <result property="mno" column="Mno" jdbcType="VARCHAR"/>
+    <result property="password" column="Password" jdbcType="VARCHAR"/>
+</resultMap>
+    <insert id="insertTeacher" parameterType="beautiful.back.bb.entry.Teachers">
+        insert into teachers values(#{tno},#{tname},#{mno},#{password})
+    </insert>
+    <update id="updatePasswordByTno">
+        update teachers set Password = #{password} where tno = #{tno}
+    </update>
+    <update id="updateTnameByTno">
+        update teachers set Tname = #{tname} where tno = #{tno}
+    </update>
+    <delete id="delByTnoInt">
+        delete from teachers where Tno = #{tno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Teachers">
+        select (Tno,Tname,Mno) from teachers
+    </select>
+    <select id="selectTeacherByTno" resultType="beautiful.back.bb.entry.Teachers">
+        select (Tname,Mno) from teachers where Tno = #{tno}
+    </select>
+    <select id="selectTeachersByMno" resultType="beautiful.back.bb.entry.Teachers">
+        select (Tno,Tname) from teachers where Mno = #{mno}
+    </select>
 </mapper>

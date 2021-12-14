@@ -17,4 +17,43 @@
 <!--        Sno,Sname,clno,-->
 <!--        Password,Imgpath,Mno-->
 <!--    </sql>-->
+    <insert id="insertStudent">
+        insert into students values (#{sno},#{sname},#{clno},#{password},#{imgpath},#{mno})
+    </insert>
+    <update id="updataPasswordBySno">
+        update students set Password = #{password} where sno = #{sno}
+    </update>
+    <update id="updataNameBySno">
+        update students set Sname = #{sname} where sno = #{sno}
+    </update>
+    <update id="updataImgpathBySno">
+        update students set Imgpath = #{imgpath} where sno = #{sno}
+    </update>
+    <update id="updataClnoBySno">
+        update students set clno = #{clno} where sno = #{sno}
+    </update>
+    <update id="updataMnoBySno">
+        update students set Mno = #{mno} where sno = #{sno}
+    </update>
+    <delete id="delStudentBySno">
+        delete from students where Sno = #{sno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Students">
+        select (Sno,Sname,clno,Imgpath,Mno) from students
+    </select>
+    <select id="selectStudentByClno" resultType="beautiful.back.bb.entry.Students">
+        select (Sno,Sname,clno,Imgpath,Mno) from students where clno = #{clno}
+    </select>
+    <select id="selectStudentsByMno" resultType="beautiful.back.bb.entry.Students">
+        select (Sno,Sname,clno,Imgpath,Mno) from students where Mno = #{mno}
+    </select>
+    <select id="selectStudentBySno" resultType="beautiful.back.bb.entry.Students">
+        select (Sno,Sname,clno,Imgpath,Mno) from students where Sno = #{sno}
+    </select>
+    <select id="selectImgpathBySno" resultType="java.lang.String">
+        select Imgpath from students where Sno = #{sno}
+    </select>
+    <select id="selectStundentsBySname" resultType="beautiful.back.bb.entry.Students">
+        select (Sno,Sname,clno,Imgpath,Mno) from students where Sname like  concat('%','${sname}','%')
+    </select>
 </mapper>

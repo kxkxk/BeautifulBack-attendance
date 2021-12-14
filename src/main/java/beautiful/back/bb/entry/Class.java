@@ -29,6 +29,18 @@ public class Class implements Serializable {
     private String tno;
 
     private static final long serialVersionUID = 1L;
+    /**
+     * @param clno
+     * @param clname
+     * @param mno
+     * @param tno
+     */
+    public Class(String clno, String clname, String mno, String tno) {
+        this.clno = clno;
+        this.clname = clname;
+        this.mno = mno;
+        this.tno = tno;
+    }
 
     /**
      * 

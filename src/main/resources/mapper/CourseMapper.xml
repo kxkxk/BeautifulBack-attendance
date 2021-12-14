@@ -4,19 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.CourseMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Course">-->
-<!--            <id property="cno" column="Cno" jdbcType="VARCHAR"/>-->
-<!--            <result property="cstatus" column="Cstatus" jdbcType="INTEGER"/>-->
-<!--            <result property="cname" column="Cname" jdbcType="VARCHAR"/>-->
-<!--            <result property="teacher" column="Teacher" jdbcType="VARCHAR"/>-->
-<!--            <result property="type" column="Type" jdbcType="INTEGER"/>-->
-<!--            <result property="info" column="Info" jdbcType="VARCHAR"/>-->
-<!--            <result property="clno" column="CLno" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
-
-<!--    <sql id="Base_Column_List">-->
-<!--        Cno,Cstatus,Cname,-->
-<!--        Teacher,Type,Info,-->
-<!--        CLno-->
-<!--    </sql>-->
+    <insert id="insertCourse">
+        insert into course values (#{cno},#{cname},#{tno},#{type},#{info},#{clno},#{startdate},#{enddate})
+    </insert>
+    <update id="updateCnameByCno">
+        update course set Cname = #{cname} where cno = #{cno}
+    </update>
+    <update id="updateCinfoByCno">
+        update course set Info = #{cinfo} where cno = #{cno}
+    </update>
+    <delete id="delCourseByCno">
+        delete from course where Cno = #{cno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Course">
+        select * from course
+    </select>
+    <select id="selectCourseByTeacher" resultType="beautiful.back.bb.entry.Course">
+        select * from course where Tno = #{tno}
+    </select>
+    <select id="selectCourseByClno" resultType="beautiful.back.bb.entry.Course">
+        select * from course where CLno = #{clno}
+    </select>
+    <select id="selectCourseByDate" resultType="beautiful.back.bb.entry.Course">
+        select * from course where startdate &gt;= #{start} and enddate &lt;= #{end}
+    </select>
+    <select id="selectCourseDateBig" resultType="beautiful.back.bb.entry.Course">
+        select * from course where startdate &gt;= #{start}
+    </select>
 </mapper>

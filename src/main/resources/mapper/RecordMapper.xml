@@ -4,16 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.RecordMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Record">-->
-<!--            <id property="rno" column="Rno" jdbcType="INTEGER"/>-->
-<!--            <result property="atno" column="Atno" jdbcType="VARCHAR"/>-->
-<!--            <result property="sno" column="Sno" jdbcType="VARCHAR"/>-->
-<!--            <result property="date" column="Date" jdbcType="DATE"/>-->
-<!--            <result property="type" column="Type" jdbcType="INTEGER"/>-->
-<!--    </resultMap>-->
+    <insert id="insertRecord">
+        insert into record values (Atno=#{atno},sno=#{sno},date=#{date},type=#{type})
+    </insert>
+    <update id="updateTypeByAtnoAndSnoInt">
+        update record set Type = #{type} where Atno = #{atno} and sno = #{sno}
+    </update>
+    <delete id="delRecordByAtno">
+        delete from record where Atno = #{atno}
+    </delete>
+    <select id="selectAll" resultType="beautiful.back.bb.entry.Record">
+        select * from record
+    </select>
+    <select id="selectRecordBySno" resultType="beautiful.back.bb.entry.Record">
+        select * from record where Sno = #{sno}
+    </select>
+    <select id="selectRecordByAtno" resultType="beautiful.back.bb.entry.Record">
+        select * from record where Atno = #{atno}
+    </select>
 
-<!--    <sql id="Base_Column_List">-->
-<!--        Rno,Atno,Sno,-->
-<!--        Date,Type-->
-<!--    </sql>-->
+
 </mapper>

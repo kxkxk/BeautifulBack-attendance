@@ -23,6 +23,16 @@ public class Major implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     *
+     * @param mno
+     * @param mname
+     */
+    public Major(String mno, String mname) {
+        this.mno = mno;
+        this.mname = mname;
+    }
+
+    /**
      * 
      */
     public String getMno() {
