@@ -10,7 +10,7 @@
     <result property="password" column="Password" jdbcType="VARCHAR"/>
 </resultMap>
     <insert id="insertTeacher" parameterType="beautiful.back.bb.entry.Teachers">
-        insert into teachers values(#{tno},#{tname},#{mno},#{password})
+        insert into teachers values(#{tno},#{tname},#{mno},#{password},#{uuid})
     </insert>
     <update id="updatePasswordByTno">
         update teachers set Password = #{password} where tno = #{tno}
@@ -29,5 +29,14 @@
     </select>
     <select id="selectTeachersByMno" resultType="beautiful.back.bb.entry.Teachers">
         select (Tno,Tname) from teachers where Mno = #{mno}
+    </select>
+    <select id="getuuid" resultType="java.lang.String">
+        select uuid from teachers where Tno = #{tno}
+    </select>
+    <select id="getTnoByUuid" resultType="java.lang.String">
+        select Tno from teachers where uuid = #{uuid}
+    </select>
+    <select id="selectTeacherByUuid" resultType="beautiful.back.bb.entry.Teachers">
+        select * from teachers where uuid = #{uuid}
     </select>
 </mapper>

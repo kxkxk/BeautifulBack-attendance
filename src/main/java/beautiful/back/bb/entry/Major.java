@@ -2,6 +2,8 @@ package beautiful.back.bb.entry;
 
 
 import com.alibaba.druid.support.monitor.annotation.MTable;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,6 +11,8 @@ import java.io.Serializable;
  * 
  * @TableName major
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class Major implements Serializable {
     /**
      * 
@@ -22,15 +26,6 @@ public class Major implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     * @param mno
-     * @param mname
-     */
-    public Major(String mno, String mname) {
-        this.mno = mno;
-        this.mname = mname;
-    }
 
     /**
      * 

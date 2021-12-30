@@ -1,12 +1,14 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Admins;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
 * @Entity ..beautiful.back.bb.entry.Admins
 */
+@Mapper
 public interface AdminsMapper {
     /**
      * 新建管理员
@@ -43,7 +45,7 @@ public interface AdminsMapper {
      * @param ano
      * @return List<Admins>
      */
-    List<Admins> selectAdminByAno(String ano);
+    Admins selectAdminByAno(String ano);
 
     /**
      * 查找所有管理员

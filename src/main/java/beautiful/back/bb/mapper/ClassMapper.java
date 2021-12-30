@@ -1,6 +1,7 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Class;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -8,40 +9,15 @@ import java.util.List;
 /**
 * @Entity ..beautiful.back.bb.entry.Class
 */
+@Mapper
 public interface ClassMapper {
-    /**
-     * 查询所有班级
-     * @return List<Class>
-     */
-    List<Class> selectAll();
 
     /**
-     * 根据班级号查询班级
-     * @param clno
-     * @return Class
-     */
-    Class selectClassByClno(String clno);
-
-    /**
-     * 根据教师号查询班级
-     * @param tno
-     * @return List<Class>
-     */
-    List<Class> selectClassByTno(String tno);
-
-    /**
-     * 根据专业号查询班级
-     * @param mno
-     * @return List<Class>
-     */
-    List<Class> selectClassByMno(String mno);
-
-    /**
-     * 创建班级
+     * 添加学生
      * @param cla
      * @return int
      */
-    int insertClass(Class cla);
+    int insertStudent(Class cla);
 
     /**
      * 删除班级
@@ -51,19 +27,19 @@ public interface ClassMapper {
     int deleteClassByClno(String clno);
 
     /**
-     * 修改班级教师信息
+     * 删除学生
+     * @param sno
      * @param clno
-     * @param tno
-     * @return int
+     * @return
      */
-    int updataTnoByClno(String clno, String tno);
+    int deleteStudentBySnoAndClno(String sno,String clno);
 
     /**
-     * 修改班级专业信息
+     * 查找某课程的学生
      * @param clno
-     * @param mno
-     * @return int
+     * @return
      */
-    int updataMnoByClno(String clno,String mno);
+    List<String> selectStudentsByClno(String clno);
 
+    List<String> selectClnoBySno(String sno);
 }

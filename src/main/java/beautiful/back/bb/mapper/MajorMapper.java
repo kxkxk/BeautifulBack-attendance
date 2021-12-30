@@ -1,6 +1,7 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Major;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
 * @Entity ..beautiful.back.bb.entry.Major
 */
+@Mapper
 public interface MajorMapper {
     /**
      * 新建专业
@@ -19,7 +21,7 @@ public interface MajorMapper {
     /**
      * 删除专业
      * @param mno
-     * @return int 
+     * @return int
      */
     int deleteByMno(String mno);
     /**

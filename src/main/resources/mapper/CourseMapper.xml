@@ -5,7 +5,7 @@
 <mapper namespace="beautiful.back.bb.mapper.CourseMapper">
 
     <insert id="insertCourse">
-        insert into course values (#{cno},#{cname},#{tno},#{type},#{info},#{clno},#{startdate},#{enddate})
+        insert into course values (#{cno},#{cname},#{tno},#{info},#{clno})
     </insert>
     <update id="updateCnameByCno">
         update course set Cname = #{cname} where cno = #{cno}
@@ -22,13 +22,10 @@
     <select id="selectCourseByTeacher" resultType="beautiful.back.bb.entry.Course">
         select * from course where Tno = #{tno}
     </select>
-    <select id="selectCourseByClno" resultType="beautiful.back.bb.entry.Course">
+    <select id="selectCnoByClno" resultType="java.lang.String">
+        select Cno from course where CLno = #{clno}
+    </select>
+    <select id="selectCoursesByClno" resultType="beautiful.back.bb.entry.Course">
         select * from course where CLno = #{clno}
-    </select>
-    <select id="selectCourseByDate" resultType="beautiful.back.bb.entry.Course">
-        select * from course where startdate &gt;= #{start} and enddate &lt;= #{end}
-    </select>
-    <select id="selectCourseDateBig" resultType="beautiful.back.bb.entry.Course">
-        select * from course where startdate &gt;= #{start}
     </select>
 </mapper>

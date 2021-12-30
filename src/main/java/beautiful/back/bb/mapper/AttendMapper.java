@@ -1,12 +1,14 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Attend;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
 * @Entity ..beautiful.back.bb.entry.Attend
 */
+@Mapper
 public interface AttendMapper{
     /**
      * 新建考勤
@@ -63,4 +65,6 @@ public interface AttendMapper{
      * @return List<Attend>
      */
     List<Attend> selectAttendByCno(String cno);
+
+    Attend selectAttendByAtno(String atno);
 }

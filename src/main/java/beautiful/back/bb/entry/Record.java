@@ -1,6 +1,9 @@
 package beautiful.back.bb.entry;
 
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +11,8 @@ import java.util.Date;
  * 
  * @TableName record
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class Record implements Serializable {
     /**
      * 
@@ -36,21 +41,6 @@ public class Record implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     * @param rno
-     * @param atno
-     * @param sno
-     * @param date
-     * @param type
-     */
-    public Record(Integer rno, String atno, String sno, Date date, Integer type) {
-        this.rno = rno;
-        this.atno = atno;
-        this.sno = sno;
-        this.date = date;
-        this.type = type;
-    }
 
     /**
      * 

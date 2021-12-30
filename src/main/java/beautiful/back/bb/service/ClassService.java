@@ -1,11 +1,11 @@
 package beautiful.back.bb.service;
 
-import beautiful.back.bb.entry.Class;
+import java.util.List;
 
 
 /**
 *
 */
 public interface ClassService{
-
+    List<String> findAllClnoBySno(String sno);
 }

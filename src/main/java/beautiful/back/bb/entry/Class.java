@@ -1,101 +1,75 @@
 package beautiful.back.bb.entry;
 
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * 
  * @TableName class
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class Class implements Serializable {
     /**
-     * 
+     *
+     */
+    private Integer id;
+
+    /**
+     *
      */
     private String clno;
 
     /**
-     * 
+     *
      */
-    private String clname;
-
-    /**
-     * 
-     */
-    private String mno;
-
-    /**
-     * 
-     */
-    private String tno;
+    private String sno;
 
     private static final long serialVersionUID = 1L;
+
     /**
-     * @param clno
-     * @param clname
-     * @param mno
-     * @param tno
+     *
      */
-    public Class(String clno, String clname, String mno, String tno) {
-        this.clno = clno;
-        this.clname = clname;
-        this.mno = mno;
-        this.tno = tno;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * 
+     *
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     *
      */
     public String getClno() {
         return clno;
     }
 
     /**
-     * 
+     *
      */
     public void setClno(String clno) {
         this.clno = clno;
     }
 
     /**
-     * 
+     *
      */
-    public String getClname() {
-        return clname;
+    public String getSno() {
+        return sno;
     }
 
     /**
-     * 
+     *
      */
-    public void setClname(String clname) {
-        this.clname = clname;
-    }
-
-    /**
-     * 
-     */
-    public String getMno() {
-        return mno;
-    }
-
-    /**
-     * 
-     */
-    public void setMno(String mno) {
-        this.mno = mno;
-    }
-
-    /**
-     * 
-     */
-    public String getTno() {
-        return tno;
-    }
-
-    /**
-     * 
-     */
-    public void setTno(String tno) {
-        this.tno = tno;
+    public void setSno(String sno) {
+        this.sno = sno;
     }
 
     @Override
@@ -110,20 +84,18 @@ public class Class implements Serializable {
             return false;
         }
         Class other = (Class) that;
-        return (this.getClno() == null ? other.getClno() == null : this.getClno().equals(other.getClno()))
-            && (this.getClname() == null ? other.getClname() == null : this.getClname().equals(other.getClname()))
-            && (this.getMno() == null ? other.getMno() == null : this.getMno().equals(other.getMno()))
-            && (this.getTno() == null ? other.getTno() == null : this.getTno().equals(other.getTno()));
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+                && (this.getClno() == null ? other.getClno() == null : this.getClno().equals(other.getClno()))
+                && (this.getSno() == null ? other.getSno() == null : this.getSno().equals(other.getSno()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getClno() == null) ? 0 : getClno().hashCode());
-        result = prime * result + ((getClname() == null) ? 0 : getClname().hashCode());
-        result = prime * result + ((getMno() == null) ? 0 : getMno().hashCode());
-        result = prime * result + ((getTno() == null) ? 0 : getTno().hashCode());
+        result = prime * result + ((getSno() == null) ? 0 : getSno().hashCode());
         return result;
     }
 
@@ -133,10 +105,9 @@ public class Class implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
         sb.append(", clno=").append(clno);
-        sb.append(", clname=").append(clname);
-        sb.append(", mno=").append(mno);
-        sb.append(", tno=").append(tno);
+        sb.append(", sno=").append(sno);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

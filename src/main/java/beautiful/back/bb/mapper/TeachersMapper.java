@@ -1,12 +1,14 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Teachers;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
 * @Entity ..beautiful.back.bb.entry.Teachers
 */
+@Mapper
 public interface TeachersMapper {
 
     /**
@@ -58,4 +60,21 @@ public interface TeachersMapper {
      */
     int delByTnoInt(String tno);
 
+    /**
+     * 获得uuid
+     * @param tno
+     * @return String
+     */
+    String getuuid(String tno);
+    /**
+     *
+     */
+    String getTnoByUuid(String uuid);
+
+    /**
+     * 通过uuid查找teacher
+     * @param uuid
+     * @return Teachers
+     */
+    Teachers selectTeacherByUuid(String uuid);
 }

@@ -1,5 +1,6 @@
 package beautiful.back.bb.mapper;
 import beautiful.back.bb.entry.Record;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -7,6 +8,7 @@ import java.util.List;
 /**
 * @Entity ..beautiful.back.bb.entry.Record
 */
+@Mapper
 public interface RecordMapper {
 
     /**

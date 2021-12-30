@@ -4,21 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.StudentsMapper">
 
-<!--    <resultMap id="BaseResultMap" type="..Students">-->
-<!--            <id property="sno" column="Sno" jdbcType="VARCHAR"/>-->
-<!--            <result property="sname" column="Sname" jdbcType="VARCHAR"/>-->
-<!--            <result property="clno" column="clno" jdbcType="VARCHAR"/>-->
-<!--            <result property="password" column="Password" jdbcType="VARCHAR"/>-->
-<!--            <result property="imgpath" column="Imgpath" jdbcType="VARCHAR"/>-->
-<!--            <result property="mno" column="Mno" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
-
-<!--    <sql id="Base_Column_List">-->
-<!--        Sno,Sname,clno,-->
-<!--        Password,Imgpath,Mno-->
-<!--    </sql>-->
     <insert id="insertStudent">
-        insert into students values (#{sno},#{sname},#{clno},#{password},#{imgpath},#{mno})
+        insert into students values (#{sno},#{sname},#{password},#{imgpath},#{mno},#{uuid},#{wxid})
     </insert>
     <update id="updataPasswordBySno">
         update students set Password = #{password} where sno = #{sno}
@@ -29,31 +16,56 @@
     <update id="updataImgpathBySno">
         update students set Imgpath = #{imgpath} where sno = #{sno}
     </update>
-    <update id="updataClnoBySno">
-        update students set clno = #{clno} where sno = #{sno}
-    </update>
     <update id="updataMnoBySno">
         update students set Mno = #{mno} where sno = #{sno}
     </update>
-    <delete id="delStudentBySno">
-        delete from students where Sno = #{sno}
+    <update id="updateStudentInfo">
+        update students
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sname!=null">
+                sname = #{sname},
+            </if><if test="password != null">
+            password = #{password},
+        </if><if test="Imgpath != null">
+            imgpath = #{imgpath},
+        </if><if test="mno != null">
+            mno = #{mno},
+        </if><if test="wxid != null">
+            wxid = #{wxid},
+        </if>
+         </trim>
+    </update>
+    <update id="updateWxid">
+        update students set wxid = #{wxid} where sno  = #{sno}
+    </update>
+    <delete id="delStudentByUuid">
+        delete from students where uuid = #{uuid}
     </delete>
     <select id="selectAll" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,clno,Imgpath,Mno) from students
-    </select>
-    <select id="selectStudentByClno" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,clno,Imgpath,Mno) from students where clno = #{clno}
+        select (Sno,Sname,Imgpath,Mno) from students
     </select>
     <select id="selectStudentsByMno" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,clno,Imgpath,Mno) from students where Mno = #{mno}
+        select (Sno,Sname,Imgpath,Mno) from students where Mno = #{mno}
     </select>
     <select id="selectStudentBySno" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,clno,Imgpath,Mno) from students where Sno = #{sno}
+        select (Sno,Sname,Imgpath,Mno) from students where Sno = #{sno}
     </select>
     <select id="selectImgpathBySno" resultType="java.lang.String">
         select Imgpath from students where Sno = #{sno}
     </select>
     <select id="selectStundentsBySname" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,clno,Imgpath,Mno) from students where Sname like  concat('%','${sname}','%')
+        select (Sno,Sname,Imgpath,Mno) from students where Sname like  concat('%','${sname}','%')
+    </select>
+    <select id="selectUuidBySno" resultType="java.lang.String">
+        select uuid from students where Sno = #{sno}
+    </select>
+    <select id="selectPasswordBySno" resultType="java.lang.String">
+        select Password from students where Sno = #{sno}
+    </select>
+    <select id="selectUuidByWxid" resultType="java.lang.String">
+        select uuid from students where wxid = #{wxid}
+    </select>
+    <select id="selectStudentByUuid" resultType="beautiful.back.bb.entry.Students">
+        select * from students where uuid = #{uuid}
     </select>
 </mapper>

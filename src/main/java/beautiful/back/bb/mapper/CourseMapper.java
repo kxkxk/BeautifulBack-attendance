@@ -1,6 +1,7 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Course;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
 * @Entity ..beautiful.back.bb.entry.Course
 */
+@Mapper
 public interface CourseMapper {
     /**
      * 新建课程
@@ -28,28 +30,6 @@ public interface CourseMapper {
      * @return List<Course>
      */
     List<Course> selectCourseByTeacher(String tno);
-
-    /**
-     * 查找班级名下所有课程
-     * @param clno
-     * @return List<Course>
-     */
-    List<Course> selectCourseByClno(String clno);
-
-    /**
-     * 查找某段时间内的课程
-     * @param start
-     * @param end
-     * @return List<Course>
-     */
-    List<Course> selectCourseByDate(String start,String end);
-
-    /**
-     * 查询大于某个时间的课程
-     * @param date
-     * @return List<Course>
-     */
-    List<Course> selectCourseDateBig(String date);
 
     /**
      * 修改课程名
@@ -73,4 +53,8 @@ public interface CourseMapper {
      * @return int
      */
     int delCourseByCno(String cno);
+
+    List<String> selectCnoByClno(String clno);
+
+    Course selectCoursesByClno(String clno);
 }

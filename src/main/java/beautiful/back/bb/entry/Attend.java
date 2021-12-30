@@ -1,6 +1,8 @@
 package beautiful.back.bb.entry;
 
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ import java.util.Date;
  * 
  * @TableName attend
  */
+@NoArgsConstructor
 public class Attend implements Serializable {
     /**
      *

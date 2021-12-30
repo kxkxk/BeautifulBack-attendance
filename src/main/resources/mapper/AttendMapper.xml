@@ -28,6 +28,9 @@
     <select id="selectAttendByCno" resultType="beautiful.back.bb.entry.Attend">
         select * from attend where Cno = #{cno}
     </select>
+    <select id="selectAttendByAtno" resultType="beautiful.back.bb.entry.Attend">
+        select * from attend where Atno = #{atno}
+    </select>
 
 
 </mapper>

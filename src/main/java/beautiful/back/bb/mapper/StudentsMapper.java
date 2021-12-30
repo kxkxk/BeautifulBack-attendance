@@ -1,13 +1,16 @@
 package beautiful.back.bb.mapper;
 
 import beautiful.back.bb.entry.Students;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
 * @Entity ..beautiful.back.bb.entry.Students
 */
+@Mapper
 public interface StudentsMapper{
+
     /**
      * 新建学生
      * @param student
@@ -40,14 +43,6 @@ public interface StudentsMapper{
     int updataImgpathBySno(String sno,String imgpath);
 
     /**
-     * 改班级
-     * @param sno
-     * @param clno
-     * @return int
-     */
-    int updataClnoBySno(String sno,String clno);
-
-    /**
      * 改专业
      * @param sno
      * @param mno
@@ -56,23 +51,16 @@ public interface StudentsMapper{
     int updataMnoBySno(String sno,String mno);
     /**
      * 删除学生
-     * @param sno
+     * @param uuid
      * @return int
      */
-    int delStudentBySno(String sno);
+    int delStudentByUuid(String uuid);
 
     /**
      * 查找所有学生
      * @return List<Students>
      */
     List<Students> selectAll();
-
-    /**
-     * 查找同一班级的学生
-     * @param cno
-     * @return List<Students>
-     */
-    List<Students> selectStudentByClno(String cno);
 
     /**
      * 查找同一专业的学生
@@ -89,6 +77,13 @@ public interface StudentsMapper{
     Students selectStudentBySno(String sno);
 
     /**
+     * 找密码
+     * @param sno
+     * @return String
+     */
+    String selectPasswordBySno(String sno);
+
+    /**
      * 查找某个学生的照片路径
      * @param sno
      * @return String
@@ -101,4 +96,31 @@ public interface StudentsMapper{
      * @return List<Students>
      */
     List<Students> selectStundentsBySname(String sname);
+
+    /**
+     * 通过学号查找uuid
+     * @param sno
+     * @return
+     */
+    String selectUuidBySno(String sno);
+
+    /**
+     * 通过微信id查找uuid
+     * @param wxid
+     * @return
+     */
+    String selectUuidByWxid(String wxid);
+
+    Students selectStudentByUuid(String uuid);
+
+    int updateStudentInfo(Students students);
+
+
+    /**
+     * 更新微信id
+     * @param sno
+     * @param wxid
+     * @return
+     */
+    int updateWxid(String sno,String wxid);
 }

@@ -1,12 +1,15 @@
 package beautiful.back.bb.entry;
 
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * 
  * @TableName admins
  */
+@NoArgsConstructor
 public class Admins implements Serializable {
 
     /**

@@ -4,28 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="beautiful.back.bb.mapper.ClassMapper">
 
-    <insert id="insertClass">
-        insert into class values (#{clno},#{clname},${mno},#{tno})
+    <insert id="insertStudent">
+        insert into class values (CLno=#{clno},sno=#{sno})
     </insert>
-    <update id="updataTnoByClno">
-        update class set Tno = #{tno} where clno = #{clno}
-    </update>
-    <update id="updataMnoByClno">
-        update class set Mno = #{mno} where clno = #{clno}
-    </update>
     <delete id="deleteClassByClno">
         delete from class where CLno = #{clno}
     </delete>
-    <select id="selectAll" resultType="beautiful.back.bb.entry.Class">
-        select * from class
+    <delete id="deleteStudentBySnoAndClno">
+        delete from class where CLno = #{clno} and sno = #{sno}
+    </delete>
+    <select id="selectStudentsByClno" resultType="java.lang.String">
+        select Sno from class where CLno = #{clno}
     </select>
-    <select id="selectClassByClno" resultType="beautiful.back.bb.entry.Class">
-        select * from class where CLno = #{clno}
-    </select>
-    <select id="selectClassByTno" resultType="beautiful.back.bb.entry.Class">
-        select * from class where Tno = #{tno}
-    </select>
-    <select id="selectClassByMno" resultType="beautiful.back.bb.entry.Class">
-        select * from class where Mno = #{mno}
+    <select id="selectClnoBySno" resultType="java.lang.String">
+        select CLno from class where sno=#{sno}
     </select>
 </mapper>
