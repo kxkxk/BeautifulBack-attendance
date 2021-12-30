@@ -21,7 +21,7 @@ public interface StudentsService{
     //查找学生信息
     Students getStudentInfo(String uuid);
     //判断一个学生是否存在
-    boolean ifStudent(String sno);
+    boolean isStudent(String sno);
     //删除学生
     boolean delStudent(String uuid);
 

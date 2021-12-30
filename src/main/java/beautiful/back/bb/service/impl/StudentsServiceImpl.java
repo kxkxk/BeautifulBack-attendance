@@ -53,7 +53,7 @@ public class StudentsServiceImpl implements StudentsService {
     }
 
     @Override
-    public boolean ifStudent(String sno) {
+    public boolean isStudent(String sno) {
         if(!studentsMapper.selectUuidBySno(sno).isEmpty())
             return true;
         return false;

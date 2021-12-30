@@ -39,4 +39,7 @@
     <select id="selectTeacherByUuid" resultType="beautiful.back.bb.entry.Teachers">
         select * from teachers where uuid = #{uuid}
     </select>
+    <select id="selectUuidByTno" resultType="java.lang.String">
+        select uuid from teachers where Tno = #{tno}
+    </select>
 </mapper>

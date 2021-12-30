@@ -77,4 +77,6 @@ public interface TeachersMapper {
      * @return Teachers
      */
     Teachers selectTeacherByUuid(String uuid);
+
+    String selectUuidByTno(String tno);
 }

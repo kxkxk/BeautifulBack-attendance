@@ -127,7 +127,7 @@ public class smControllor {
     @UserLoginToken
     @RequestMapping("numfind")
     boolean numFind(String sNum){
-        return studentsService.ifStudent(sNum);
+        return studentsService.isStudent(sNum);
     }
 
     /**
@@ -138,8 +138,10 @@ public class smControllor {
     //未测试
     @UserLoginToken
     @RequestMapping("remove")
-    String remove(String sid){
-        if(studentsService.delStudent(sid))
+    String remove(String sid,String token){
+        if(!tools.isAdmin(token))
+            return "权限不足";
+        else if(studentsService.delStudent(sid))
             return sid;
         return "删除失败";
     }
