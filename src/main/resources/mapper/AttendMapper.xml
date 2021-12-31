@@ -5,13 +5,26 @@
 <mapper namespace="beautiful.back.bb.mapper.AttendMapper">
 
     <insert id="insertAttend">
-        insert into attend values (#{atno},#{cno},#{tno},#{remarks},#{status},#{startdate},#{enddate},#{cstatus})
+        insert into attend values (#{atno},#{cno},#{tno},#{remarks},#{status},#{startdate},#{enddate})
     </insert>
     <update id="updateStatusByAtno">
         update attend set Status = #{status} where atno = #{atno}
     </update>
     <update id="updateRemarksByAtnoInt">
         update attend set Remarks = #{remarks} where atno = #{atno}
+    </update>
+    <update id="updateAttendByAtno" parameterType="attend">
+        update attend
+<trim prefix="SET" suffixOverrides=",">
+    <if test="Startdate != null">
+        startdate = #{startdate}
+    </if><if test="enddate != null">
+    enddate = #{enddate}
+</if><if test="remarks != null">
+    remarks = #{remarks}
+</if>
+where atno = #{atno}
+</trim>
     </update>
     <delete id="delAttendByAtno">
         delete from attend where Atno = #{atno}

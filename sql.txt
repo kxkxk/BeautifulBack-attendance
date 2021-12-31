@@ -1,73 +1,133 @@
-
-create table major(
-                      Mno	varchar(20) primary key not null ,
-                      Mname	varchar(15) not null
-);
-create table teachers(
-                         Tno	varchar(20)	not null primary key ,
-                         Tname varchar(15)	not null,
-                         Mno varchar(20)	not null,
-                         Password varchar(30)	not null,
-                         foreign key (Mno) references major(Mno)
-);
-create table class(
-                      CLno varchar(20) not null primary key,
-                      CLname	varchar(15) not null ,
-                      Mno	varchar(20) not null ,
-                      Tno	varchar(20) not null ,
-                      foreign key (Mno) references major(Mno),
-                      foreign key (Tno) references teachers(Tno)
-);
-create table course (
-                        Cno varchar(20) not null primary key ,
-                        Cname varchar(50) not null ,
-                        Tno	varchar(20) not null ,
-                        Type int not null ,
-                        Info varchar(15) not null ,
-                        CLno	varchar(20) not null,
-                        startdate datetime not null ,
-                        enddate datetime not null ,
-                        foreign key (CLno) references class (CLno),
-                        foreign key (Tno) references teachers(Tno)
+create table admins
+(
+    Ano      varchar(33) not null
+        primary key,
+    Aname    varchar(15) not null,
+    Password varchar(30) not null
 );
 
-create table students(
-                         Sno	varchar(20) not null primary key ,
-                         Sname	varchar(15) not null ,
-                         clno	varchar(20) not null ,
-                         Password varchar(30) not null ,
-                         Imgpath	varchar(255) not null ,
-                         Mno	varchar(20) not null ,
-                         foreign key (clno) references class(clno),
-                         foreign key (Mno) references major(Mno)
-);
-create table admins(
-                       Ano	varchar(20)	not null primary key,
-                       Aname	varchar(15)	not null,
-                       Password varchar(30) not null
+create table major
+(
+    Mno   varchar(33) not null
+        primary key,
+    Mname varchar(15) not null
 );
 
-create table attend(
-                       Atno	varchar(20)	not null primary key ,
-                       Cno	varchar(20)	not null,
-                       Tno	varchar(20)	not null,
-                       Remarks	varchar(255),
-                       Status	int	not null,
-                       startdate	datetime	not null,
-                       enddate	datetime	not null,
-                       Cstatus	int not null ,
-                       foreign key (Cno) references course(Cno),
-                       foreign key (Tno) references teachers(Tno)
+create table students
+(
+    Sno      varchar(33)  not null
+        primary key,
+    Sname    varchar(15)  not null,
+    Password varchar(30)  not null,
+    Imgpath  varchar(255) not null,
+    Mno      varchar(33)  not null,
+    uuid     varchar(33)  not null,
+    wxid     varchar(50)  null,
+    constraint uuid
+        unique (uuid),
+    constraint wxid
+        unique (wxid),
+    constraint students_ibfk_1
+        foreign key (Mno) references major (Mno)
 );
-create table record(
-                       Rno	int primary key auto_increment,
-                       Atno	varchar(20)	not null,
-                       Sno	varchar(20)	not null,
-                       Date	date	not null,
-                       Type	int	not null,
-                       foreign key (Sno)references students(Sno),
-                       foreign key (Atno) references attend(Atno)
+
+create index Mno
+    on students (Mno);
+
+create table teachers
+(
+    Tno      varchar(33) not null
+        primary key,
+    Tname    varchar(15) not null,
+    Mno      varchar(33) not null,
+    Password varchar(30) not null,
+    uuid     varchar(33) not null,
+    constraint teachers_Tid_uindex
+        unique (uuid),
+    constraint teachers_ibfk_1
+        foreign key (Mno) references major (Mno)
 );
+
+create table course
+(
+    Cno   varchar(33) not null
+        primary key,
+    Cname varchar(50) not null,
+    Tno   varchar(33) not null,
+    Info  varchar(15) not null,
+    CLno  varchar(33) not null,
+    constraint CLno
+        unique (CLno),
+    constraint course_ibfk_1
+        foreign key (Tno) references teachers (Tno)
+);
+
+create table attend
+(
+    Atno      varchar(33)  not null
+        primary key,
+    Cno       varchar(33)  not null,
+    Tno       varchar(33)  not null,
+    Remarks   varchar(255) null,
+    Status    int          not null,
+    startdate datetime     not null,
+    enddate   datetime     not null,
+    Cstatus   int          not null,
+    constraint attend_ibfk_1
+        foreign key (Cno) references course (Cno),
+    constraint attend_ibfk_2
+        foreign key (Tno) references teachers (Tno)
+);
+
+create index Cno
+    on attend (Cno);
+
+create index Tno
+    on attend (Tno);
+
+create table class
+(
+    CLno varchar(33) not null,
+    uuid varchar(33) not null
+        primary key,
+    Sno  varchar(33) not null,
+    constraint CLno
+        unique (CLno),
+    constraint class_ibfk_1
+        foreign key (Sno) references students (Sno),
+    constraint class_ibfk_2
+        foreign key (CLno) references course (CLno)
+);
+
+create index Sno
+    on class (Sno);
+
+create index Tno
+    on course (Tno);
+
+create table record
+(
+    Rno  int auto_increment
+        primary key,
+    Atno varchar(33) not null,
+    Sno  varchar(33) not null,
+    Date date        not null,
+    Type int         not null,
+    constraint record_ibfk_1
+        foreign key (Sno) references students (Sno),
+    constraint record_ibfk_2
+        foreign key (Atno) references attend (Atno)
+);
+
+create index Atno
+    on record (Atno);
+
+create index Sno
+    on record (Sno);
+
+create index Mno
+    on teachers (Mno);
+
 select * from major;
 insert into major values ('114514','软工');
 insert into teachers values ('112','陽樂','114514','123456');

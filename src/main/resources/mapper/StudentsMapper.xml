@@ -32,8 +32,11 @@
             mno = #{mno},
         </if><if test="wxid != null">
             wxid = #{wxid},
+        </if><if test="sno != null">
+            sno = #{sno}
         </if>
          </trim>
+            where uuid = #{uuid}
     </update>
     <update id="updateWxid">
         update students set wxid = #{wxid} where sno  = #{sno}

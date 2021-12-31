@@ -7,11 +7,13 @@ import beautiful.back.bb.entry.Record;
 import beautiful.back.bb.entry.Students;
 import beautiful.back.bb.service.*;
 import beautiful.back.bb.service.impl.tools;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,8 @@ public class smControllor {
     CourseService courseService;
     @Autowired
     ClassService classService;
+    @Autowired
+    TeachersService teachersService;
     /**
      *学生使用密码登录
      * @param sno
@@ -110,12 +114,20 @@ public class smControllor {
     //未测试
     @UserLoginToken
     @RequestMapping("course")
-    List<Course> course(String sid){
-        List<Course> courseList = new ArrayList<>();
+    Object course(String sid){
+        JSONArray jsonArray = new JSONArray();
         for (String i : classService.findAllClnoBySno(studentsService.getStudentInfo(sid).getSno())){
-            courseList.add(courseService.findAllCourseByclno(i));
+            JSONObject jsonObject = new JSONObject();
+            Course c =courseService.findAllCourseByclno(i);
+            jsonObject.put("cid",c.getCno());
+            jsonObject.put("name",c.getCname());
+            jsonObject.put("tname",teachersService.findTeacherByTno(c.getTno()).getTname());
+            jsonObject.put("info",c.getInfo());
+            jsonArray.add(jsonObject);
         }
-        return courseList;
+        JSONObject res = new JSONObject();
+        res.put("course",jsonArray);
+        return res;
     }
 
     /**
@@ -138,7 +150,9 @@ public class smControllor {
     //未测试
     @UserLoginToken
     @RequestMapping("remove")
-    String remove(String sid,String token){
+    String remove(String sid, HttpServletRequest httpServletRequest){
+        //需要测试
+        String token = httpServletRequest.getHeader("token");
         if(!tools.isAdmin(token))
             return "权限不足";
         else if(studentsService.delStudent(sid))
@@ -165,5 +179,31 @@ public class smControllor {
             reslist.add(res);
         }
         return reslist;
+    }
+//未测试
+    /**
+     * 编辑学生个人信息
+     * @param sid
+     * @param sNum
+     * @param majorId
+     * @param name
+     * @param img
+     * @return
+     */
+    @UserLoginToken
+    @RequestMapping("InfoEdit")
+    String InfoEdit(String sid,String sNum,String majorId,String name,String img,String token){
+        Students students = new Students();
+        students.setSname(name);
+        students.setUuid(sid);
+        //不为空且请求权限为教师或管理员时才能更新学号照片地址和专业
+        if(!img.isEmpty() || !sNum.isEmpty() || !majorId.isEmpty() || tools.isAdmin(token) || tools.isTeacher(token)){
+            students.setImgpath(img);
+            students.setSno(sNum);
+            students.setMno(majorId);
+        }
+        if(studentsService.updateStudent(students))
+            return sid;
+        return  "更新失败";
     }
 }

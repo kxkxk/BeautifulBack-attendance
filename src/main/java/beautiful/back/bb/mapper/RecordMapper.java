@@ -2,6 +2,7 @@ package beautiful.back.bb.mapper;
 import beautiful.back.bb.entry.Record;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -53,4 +54,8 @@ public interface RecordMapper {
      * @return int
      */
     int delRecordByAtno(String atno);
+
+    int selectCountByTypeAndAtno(String atno,int type);
+
+    int updateRecordByAtnoAndSno(String atno, String sno, int type, Date date);
 }

@@ -2,6 +2,8 @@ package beautiful.back.bb.service.impl;
 import beautiful.back.bb.entry.User;
 import com.auth0.jwt.JWT;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -50,6 +52,23 @@ public class tools {
     public static boolean isStudent(String token){
         return decodeToken(token).equals("Student");
     }
+    public static Date stampToDate(long stamp){
+        return new Date(stamp);
+    }
+    public static long dateToStamp(Date date){
+        return date.getTime();
+    }
 
-
+    /**
+     * 判断时间是否大于等于开始时间并小于结束时间
+     * @param sTime
+     * @param eTime
+     * @param nTime
+     * @return
+     */
+    public static boolean judgeDateBetween(Date sTime,Date eTime,Date nTime){
+        if((nTime.equals(sTime)||nTime.after(sTime))&&nTime.before(eTime))
+            return true;
+        return false;
+    }
 }

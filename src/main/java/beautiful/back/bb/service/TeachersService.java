@@ -15,4 +15,10 @@ public interface TeachersService{
     boolean isTeacherExist(String tno);
     //删除教师
     boolean delTeacher(String tid);
+    //获得教师号
+    String findTnoByUuid(String tid);
+    //通过uuid查找教师
+    Teachers findTeacherByUuid(String tid);
+    //通过tno查找教师
+    Teachers findTeacherByTno(String tno);
 }

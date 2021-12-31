@@ -36,4 +36,19 @@ public class TeachersServiceImpl implements TeachersService {
     public boolean delTeacher(String tid) {
         return teachersMapper.delByTnoInt(teachersMapper.getTnoByUuid(tid))>0;
     }
+
+    @Override
+    public String findTnoByUuid(String tid) {
+        return teachersMapper.selectTeacherByUuid(tid).getTno();
+    }
+
+    @Override
+    public Teachers findTeacherByUuid(String tid) {
+        return teachersMapper.selectTeacherByUuid(tid);
+    }
+
+    @Override
+    public Teachers findTeacherByTno(String tno) {
+        return teachersMapper.selectTeacherByTno(tno);
+    }
 }

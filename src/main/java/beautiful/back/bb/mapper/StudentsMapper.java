@@ -123,4 +123,5 @@ public interface StudentsMapper{
      * @return
      */
     int updateWxid(String sno,String wxid);
+
 }

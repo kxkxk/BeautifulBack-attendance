@@ -1,14 +1,11 @@
 package beautiful.back.bb.service.impl;
 
-import beautiful.back.bb.entry.Course;
 import beautiful.back.bb.entry.Students;
 
 import beautiful.back.bb.mapper.StudentsMapper;
 import beautiful.back.bb.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
 *
@@ -34,15 +31,19 @@ public class StudentsServiceImpl implements StudentsService {
 //        Students stu = studentsMapper.selectStudentBySno(sno);
         if(studentsMapper.selectPasswordBySno(sno).equals(password)){
             //更新微信id方便微信登录
-            studentsMapper.updateWxid(sno,wxid);
+            try{
+                studentsMapper.updateWxid(sno,wxid);
+            }catch (Exception e){
+                return "微信号已存在";
+            }
             return studentsMapper.selectUuidBySno(sno);
         }
         return "密码不对";
     }
 
     @Override
-    public String updateStudent(Students students) {
-        return null;
+    public boolean updateStudent(Students students) {
+        return studentsMapper.updateStudentInfo(students)>0;
     }
 
     @Override
@@ -62,6 +63,11 @@ public class StudentsServiceImpl implements StudentsService {
     @Override
     public boolean delStudent(String uuid) {
         return studentsMapper.delStudentByUuid(uuid)>0;
+    }
+
+    @Override
+    public Students getStudentInfoBySno(String sno) {
+        return studentsMapper.selectStudentBySno(sno);
     }
 
 }

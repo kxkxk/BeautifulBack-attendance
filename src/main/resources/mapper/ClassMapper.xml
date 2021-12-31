@@ -19,4 +19,8 @@
     <select id="selectClnoBySno" resultType="java.lang.String">
         select CLno from class where sno=#{sno}
     </select>
+    <select id="selectStudentCount" resultType="java.lang.Integer">
+        select count(CLno)
+        from class where CLno = #{clno};
+    </select>
 </mapper>

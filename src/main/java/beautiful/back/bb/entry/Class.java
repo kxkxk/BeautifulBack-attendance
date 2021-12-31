@@ -2,6 +2,7 @@ package beautiful.back.bb.entry;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -12,11 +13,12 @@ import java.io.Serializable;
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Class implements Serializable {
     /**
      *
      */
-    private Integer id;
+    private String id;
 
     /**
      *
@@ -30,47 +32,6 @@ public class Class implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     *
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     */
-    public String getClno() {
-        return clno;
-    }
-
-    /**
-     *
-     */
-    public void setClno(String clno) {
-        this.clno = clno;
-    }
-
-    /**
-     *
-     */
-    public String getSno() {
-        return sno;
-    }
-
-    /**
-     *
-     */
-    public void setSno(String sno) {
-        this.sno = sno;
-    }
 
     @Override
     public boolean equals(Object that) {

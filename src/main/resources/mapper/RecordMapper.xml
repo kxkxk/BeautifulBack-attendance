@@ -10,6 +10,9 @@
     <update id="updateTypeByAtnoAndSnoInt">
         update record set Type = #{type} where Atno = #{atno} and sno = #{sno}
     </update>
+    <update id="updateRecordByAtnoAndSno">
+        update record set Type = #{type}, Date = #{date} where Atno = #{atno} and Sno = #{sno}
+    </update>
     <delete id="delRecordByAtno">
         delete from record where Atno = #{atno}
     </delete>
@@ -21,6 +24,9 @@
     </select>
     <select id="selectRecordByAtno" resultType="beautiful.back.bb.entry.Record">
         select * from record where Atno = #{atno}
+    </select>
+    <select id="selectCountByTypeAndAtno" resultType="java.lang.Integer">
+        select count(*) from record where Atno = #{atno} AND type = #{type}
     </select>
 
 

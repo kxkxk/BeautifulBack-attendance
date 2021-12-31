@@ -13,6 +13,15 @@
     <update id="updateCinfoByCno">
         update course set Info = #{cinfo} where cno = #{cno}
     </update>
+    <update id="updateCourse">
+        update course <trim prefix="set" suffixOverrides=",">
+        <if test="cname != null">
+            Cname = #{cname}
+        </if><if test="tid != null">
+            tid = #{tno}
+    </if>
+    </trim>
+    </update>
     <delete id="delCourseByCno">
         delete from course where Cno = #{cno}
     </delete>
@@ -27,5 +36,12 @@
     </select>
     <select id="selectCoursesByClno" resultType="beautiful.back.bb.entry.Course">
         select * from course where CLno = #{clno}
+    </select>
+    <select id="selectClnoByCno" resultType="java.lang.String">
+        select CLno
+        from course where Cno = #{cno};
+    </select>
+    <select id="selectCourseByCno" resultType="beautiful.back.bb.entry.Course">
+        select * from course where Cno = #{cno}
     </select>
 </mapper>

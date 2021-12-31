@@ -42,4 +42,6 @@ public interface ClassMapper {
     List<String> selectStudentsByClno(String clno);
 
     List<String> selectClnoBySno(String sno);
+    int selectStudentCount(String clno);
+
 }

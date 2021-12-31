@@ -67,4 +67,6 @@ public interface AttendMapper{
     List<Attend> selectAttendByCno(String cno);
 
     Attend selectAttendByAtno(String atno);
+
+    int updateAttendByAtno(Attend attend);
 }

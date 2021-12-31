@@ -57,4 +57,7 @@ public interface CourseMapper {
     List<String> selectCnoByClno(String clno);
 
     Course selectCoursesByClno(String clno);
+    String selectClnoByCno(String cno);
+    Course selectCourseByCno(String cno);
+    int updateCourse(Course course);
 }
