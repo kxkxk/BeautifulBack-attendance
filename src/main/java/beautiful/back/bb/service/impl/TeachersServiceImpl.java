@@ -15,7 +15,7 @@ public class TeachersServiceImpl implements TeachersService {
     @Override
     public String judgePassword(String tno, String password) {
         Teachers teacher = teachersMapper.selectTeacherByTno(tno);
-        if(teacher.getPassword().equals(password))
+        if(!(teacher==null)&&teacher.getPassword().equals(password))
             return teacher.getUuid();
         return "密码错误";
     }

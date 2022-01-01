@@ -25,10 +25,10 @@
         select (Tno,Tname,Mno) from teachers
     </select>
     <select id="selectTeacherByTno" resultType="beautiful.back.bb.entry.Teachers">
-        select (Tname,Mno) from teachers where Tno = #{tno}
+        select * from teachers where Tno = #{tno}
     </select>
     <select id="selectTeachersByMno" resultType="beautiful.back.bb.entry.Teachers">
-        select (Tno,Tname) from teachers where Mno = #{mno}
+        select * from teachers where Mno = #{mno}
     </select>
     <select id="getuuid" resultType="java.lang.String">
         select uuid from teachers where Tno = #{tno}

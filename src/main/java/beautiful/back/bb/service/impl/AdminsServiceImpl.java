@@ -16,7 +16,7 @@ public class AdminsServiceImpl implements AdminsService{
 
     @Override
     public boolean judgePassword(String aname, String password) {
-        if(!(adminsMapper.selectAdminByAno(aname)==null)||adminsMapper.selectAdminByAno(aname).getPassword().equals(password))
+        if(!(adminsMapper.selectAdminByAno(aname)==null)&&adminsMapper.selectAdminByAno(aname).getPassword().equals(password))
             return true;
         return false;
     }
