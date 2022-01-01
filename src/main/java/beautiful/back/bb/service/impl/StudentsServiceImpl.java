@@ -16,7 +16,12 @@ public class StudentsServiceImpl implements StudentsService {
     StudentsMapper studentsMapper;
     @Override
     public boolean addStudent(Students students) {
-        return studentsMapper.insertStudent(students)>0;
+        try {
+            studentsMapper.insertStudent(students);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -43,7 +48,12 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Override
     public boolean updateStudent(Students students) {
-        return studentsMapper.updateStudentInfo(students)>0;
+        try {
+            studentsMapper.updateStudentInfo(students);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -62,7 +72,12 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Override
     public boolean delStudent(String uuid) {
-        return studentsMapper.delStudentByUuid(uuid)>0;
+        try {
+            studentsMapper.delStudentByUuid(uuid);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override

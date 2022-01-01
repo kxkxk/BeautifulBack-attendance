@@ -51,6 +51,9 @@ public class Attend implements Serializable {
      */
     private Date enddate;
 
+    private String x;
+    private String y;
+
 
 
     private static final long serialVersionUID = 1L;

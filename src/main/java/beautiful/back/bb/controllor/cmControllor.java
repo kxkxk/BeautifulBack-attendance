@@ -147,6 +147,7 @@ public class cmControllor {
      * @param cid
      * @return
      */
+    @UserLoginToken
     @RequestMapping("attend")
     Object attend(String cid){
         Date date = new Date();

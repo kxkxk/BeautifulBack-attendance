@@ -33,11 +33,21 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public boolean addStudent(Class c) {
-        return classMapper.insertStudent(c)>0;
+        try {
+            classMapper.insertStudent(c);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean delStudentsByClno(String clno) {
-        return classMapper.deleteClassByClno(clno)>0;
+        try {
+            classMapper.deleteClassByClno(clno);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

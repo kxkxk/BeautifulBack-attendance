@@ -11,4 +11,6 @@ import java.util.List;
 public interface MajorService{
     //查找所有major
     List<Major> findAllMajor();
+    boolean addMajor(Major major);
+    boolean delMajor(String mno);
 }

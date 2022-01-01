@@ -23,7 +23,12 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public boolean addRecord(Record record) {
-        return recordMapper.insertRecord(record)>0;
+        try {
+            recordMapper.insertRecord(record);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -34,7 +39,12 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public boolean changeStatuByAtnoAndSno(String atno, String sno, int type, Date date) {
-        return recordMapper.updateRecordByAtnoAndSno(atno,sno,type,date)>0;
+        try {
+            recordMapper.updateRecordByAtnoAndSno(atno,sno,type,date);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -5,7 +5,7 @@
 <mapper namespace="beautiful.back.bb.mapper.AttendMapper">
 
     <insert id="insertAttend">
-        insert into attend values (#{atno},#{cno},#{tno},#{remarks},#{status},#{startdate},#{enddate})
+        insert into attend values (#{atno},#{cno},#{tno},#{remarks},#{status},#{startdate},#{enddate},#{x},#{y})
     </insert>
     <update id="updateStatusByAtno">
         update attend set Status = #{status} where atno = #{atno}

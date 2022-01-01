@@ -23,7 +23,7 @@
         select  (Ano,Aname) from admins
     </select>
     <select id="selectAdminByAno" resultType="beautiful.back.bb.entry.Admins">
-        select Aname from admins where Ano = #{ano}
+        select * from admins where Ano = #{ano}
     </select>
     <select id="selectAll" resultType="beautiful.back.bb.entry.Admins">
         select * from admins

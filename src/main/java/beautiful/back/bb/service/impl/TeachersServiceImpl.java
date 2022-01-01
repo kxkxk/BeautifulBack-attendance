@@ -22,9 +22,12 @@ public class TeachersServiceImpl implements TeachersService {
 
     @Override
     public boolean register(Teachers teachers) {
-        if(teachersMapper.insertTeacher(teachers)>0)
-            return true;
-        return false;
+        try {
+            teachersMapper.insertTeacher(teachers);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -34,7 +37,12 @@ public class TeachersServiceImpl implements TeachersService {
 
     @Override
     public boolean delTeacher(String tid) {
-        return teachersMapper.delByTnoInt(teachersMapper.getTnoByUuid(tid))>0;
+        try {
+            teachersMapper.delByTnoInt(teachersMapper.getTnoByUuid(tid));
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override

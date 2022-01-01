@@ -29,7 +29,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public boolean addCourse(Course course) {
-        return courseMapper.insertCourse(course)>0;
+        try {
+            courseMapper.insertCourse(course);
+        }catch (Exception e){
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -44,7 +50,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public boolean changeCourse(Course course) {
-        return courseMapper.updateCourse(course)>0;
+        try {
+            courseMapper.updateCourse(course);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override

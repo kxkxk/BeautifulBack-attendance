@@ -20,4 +20,24 @@ public class MajorServiceImpl implements MajorService {
     public List<Major> findAllMajor() {
         return majorMapper.getAllMajor();
     }
+
+    @Override
+    public boolean addMajor(Major major) {
+        try {
+            majorMapper.insertMajor(major);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delMajor(String mno) {
+        try {
+            majorMapper.deleteByMno(mno);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }

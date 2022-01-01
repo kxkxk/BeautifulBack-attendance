@@ -45,7 +45,7 @@ public class amControllor {
      */
     @RequestMapping("new")
     @UserLoginToken
-    String createAttend(long sTime, long eTime, String tid, String info, String[] sNum, String cid, HttpServletRequest httpServletRequest){
+    String createAttend(long sTime, long eTime, String tid, String info, String[] sNum, String cid,String x,String y, HttpServletRequest httpServletRequest){
         if(!tools.isTeacher(httpServletRequest.getHeader("token"))){
             return "权限不足";
         }
@@ -53,7 +53,7 @@ public class amControllor {
         Date et = tools.stampToDate(eTime);
         int status = 1;        //考勤状态 1未开始2进行中3结束4被取消
         String uuid = tools.getUUID();
-        Attend attend  = new Attend(uuid,cid,tid,info,status,st,et);
+        Attend attend  = new Attend(uuid,cid,tid,info,status,st,et,x,y);
         if(attendService.addAttend(attend)){
             String clno = courseService.findClnoByCno(cid);
             List<String> sno = classService.findSnoByClno(clno);
@@ -164,6 +164,10 @@ public class amControllor {
     @RequestMapping("signIn")
     String signIn(String sid,String aid,int status){
         Date date = new Date();
+        Attend attend = attendService.findAttendByAtno(aid);
+        if(!tools.judgeDateBetween(attend.getStartdate(),attend.getEnddate(),date)){
+            return "考勤未开始或已结束";
+        }
         if(recordService.changeStatuByAtnoAndSno(aid,studentsService.getStudentInfo(sid).getSno(),1,date))
             return sid;
         return "考勤失败";
@@ -212,6 +216,7 @@ public class amControllor {
             jsonObject.put("sNum",students.getSno());
             jsonObject.put("status",i.getType());
             jsonObject.put("name",students.getSname());
+            jsonObject.put("date",tools.dateToStamp(i.getDate()));
             jsonArray.add(jsonObject);
         }
         return jsonArray;

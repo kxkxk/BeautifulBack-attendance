@@ -21,22 +21,42 @@ public class AttendServiceImpl implements AttendService {
 
     @Override
     public boolean addAttend(Attend attend) {
-        return attendMapper.insertAttend(attend)>0;
+        try{
+            attendMapper.insertAttend(attend);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean updateAttend(Attend attend) {
-        return attendMapper.updateAttendByAtno(attend)>0;
+        try {
+            attendMapper.updateAttendByAtno(attend);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean delAttend(String atno) {
-        return attendMapper.delAttendByAtno(atno)>0;
+        try {
+            attendMapper.delAttendByAtno(atno);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean cancelAttend(String atno) {
-        return attendMapper.updateStatusByAtno(atno,4)>0;
+        try {
+            attendMapper.updateStatusByAtno(atno,4);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
