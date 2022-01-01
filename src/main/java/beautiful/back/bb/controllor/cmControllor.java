@@ -12,10 +12,12 @@ import beautiful.back.bb.service.TeachersService;
 import beautiful.back.bb.service.impl.tools;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.beans.Transient;
 import java.util.Date;
 import java.util.List;
 //未测试
@@ -42,15 +44,17 @@ public class cmControllor {
     @RequestMapping("new")
     String create(HttpServletRequest httpServletRequest, String tid, String name, String majorId, String[] sNum){
         String token = httpServletRequest.getHeader("token");
-        if(!tools.isTeacher(token) || !tools.isAdmin(token)){
+        if(!tools.isTeacher(token) && !tools.isAdmin(token)){
             return "权限不足";
         }
         String cno = tools.getUUID();
         String clno = tools.getUUID();
+        System.out.println(clno);
         Course course = new Course(cno,name,teachersService.findTnoByUuid(tid),"1",clno);
         if(courseService.addCourse(course)){
             for (String i : sNum){
                 Class cla = new Class(tools.getUUID(),clno,i);
+                System.out.println(cla.getClno());
                 classService.addStudent(cla);
             }
             return cno;
@@ -92,22 +96,22 @@ public class cmControllor {
      * @param cid
      * @param tid
      * @param name
-     * @param majorId
      * @param sNum
      * @param httpServletRequest
      * @return
      */
     @RequestMapping("infoedit")
     @UserLoginToken
-    String infoEdit(String cid,String tid,String name,String majorId,String[] sNum,HttpServletRequest httpServletRequest){
+    String infoEdit(String cid,String tid,String name,String info,String[] sNum,HttpServletRequest httpServletRequest){
         String token = httpServletRequest.getHeader("token");
-        if(!tools.isTeacher(token) || !tools.isAdmin(token)){
+        if(!tools.isTeacher(token) && !tools.isAdmin(token)){
             return "权限不足";
         }
         Course course = new Course();
         course.setCno(cid);
-        course.setCname(name);
-        course.setTno(tid);
+        if(name!=null) course.setCname(name);
+        if(tid!=null) course.setTno(teachersService.findTnoByUuid(tid));
+        if(info!=null) course.setInfo(info);
         if(courseService.changeCourse(course)){
             if(sNum.length>0){
                 String clno = courseService.findClnoByCno(cid);
@@ -118,7 +122,7 @@ public class cmControllor {
             }
             return cid;
         }
-        return "总之就是有问题";
+        return "指定有点毛病";
     }
 
     /**
@@ -131,7 +135,7 @@ public class cmControllor {
     @UserLoginToken
     String remove(HttpServletRequest httpServletRequest,String cid){
         String token = httpServletRequest.getHeader("token");
-        if(!tools.isTeacher(token) || !tools.isAdmin(token)){
+        if(!tools.isTeacher(token) && !tools.isAdmin(token)){
             return "权限不足";
         }
         try {

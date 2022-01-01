@@ -14,13 +14,15 @@
         update course set Info = #{cinfo} where cno = #{cno}
     </update>
     <update id="updateCourse">
-        update course <trim prefix="set" suffixOverrides=",">
+        update course <trim prefix="SET" suffixOverrides=",">
         <if test="cname != null">
-            Cname = #{cname}
-        </if><if test="tid != null">
-            tid = #{tno}
+            cname = #{cname},
+        </if><if test="tno != null">
+            tno = #{tno},</if>
+        <if test="info != null">
+        info = #{info},
     </if>
-    </trim>
+    </trim>where cno = #{cno}
     </update>
     <delete id="delCourseByCno">
         delete from course where Cno = #{cno}

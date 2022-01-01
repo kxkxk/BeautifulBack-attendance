@@ -34,7 +34,9 @@ public class StudentsServiceImpl implements StudentsService {
     @Override
     public String judgePassword(String sno, String password, String wxid) {
 //        Students stu = studentsMapper.selectStudentBySno(sno);
-        if(studentsMapper.selectPasswordBySno(sno).equals(password)){
+        String pas = studentsMapper.selectPasswordBySno(sno);
+        if(pas == null) return "账号错误";
+        if(!pas.isEmpty()&&pas.equals(password)){
             //更新微信id方便微信登录
             try{
                 studentsMapper.updateWxid(sno,wxid);

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-//全部未测试
 @RestController
 @RequestMapping("ds")
 public class dsControllor {
@@ -30,7 +29,7 @@ public class dsControllor {
      * @return
      */
     @UserLoginToken
-    @RequestMapping("majorId")
+    @RequestMapping("majorid")
     List<Major> majorId(){
         return majorService.findAllMajor();
     }
@@ -58,7 +57,7 @@ public class dsControllor {
     Object login(String aNum,String password){
         JSONObject jsonObject = new JSONObject();
         if(adminsService.judgePassword(aNum,password)){
-            User user = new User(aNum,"admin",password);
+            User user = new User(aNum,"Admin",password);
             String token = userService.getToken(user);
             jsonObject.put("token",token);
             jsonObject.put("aid",aNum);

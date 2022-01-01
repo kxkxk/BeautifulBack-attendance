@@ -5,7 +5,7 @@
 <mapper namespace="beautiful.back.bb.mapper.ClassMapper">
 
     <insert id="insertStudent">
-        insert into class values (CLno=#{clno},sno=#{sno})
+        insert into class values (#{clno},#{id},#{sno})
     </insert>
     <delete id="deleteClassByClno">
         delete from class where CLno = #{clno}

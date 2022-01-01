@@ -30,8 +30,8 @@ public class amControllor {
     CourseService courseService;
     @Autowired
     ClassService classService;
-
-
+    @Autowired
+    TeachersService teachersService;
     /**
      * 创建考勤
      * @param sTime
@@ -53,7 +53,8 @@ public class amControllor {
         Date et = tools.stampToDate(eTime);
         int status = 1;        //考勤状态 1未开始2进行中3结束4被取消
         String uuid = tools.getUUID();
-        Attend attend  = new Attend(uuid,cid,tid,info,status,st,et,x,y);
+        String tno = teachersService.findTnoByUuid(tid);
+        Attend attend  = new Attend(uuid,cid,tno,info,status,st,et,x,y);
         if(attendService.addAttend(attend)){
             String clno = courseService.findClnoByCno(cid);
             List<String> sno = classService.findSnoByClno(clno);
@@ -104,14 +105,14 @@ public class amControllor {
     String infoEdit(HttpServletRequest httpServletRequest,String aid,long sTime,long eTime,String info,String[] sNum){
         String token = httpServletRequest.getHeader("token");
         Date st = tools.stampToDate(sTime), et = tools.stampToDate(eTime);
-        if(!(tools.isTeacher(token)||tools.isTeacher(token))){
+        if(!(tools.isTeacher(token)||tools.isAdmin(token))){
             return "权限不足";
         }
         Attend attend = new Attend();
         attend.setAtno(aid);
         attend.setStartdate(st);
         attend.setEnddate(et);
-        attend.setRemarks(info);
+        if(info != null) attend.setRemarks(info);
         if(attendService.updateAttend(attend)){
             for (String i : sNum) {
                 int type = 3;
@@ -133,7 +134,7 @@ public class amControllor {
     @RequestMapping("remove")
     String remove(HttpServletRequest httpServletRequest,String aid) {
         String token = httpServletRequest.getHeader("token");
-        if(!(tools.isTeacher(token)||tools.isAdmin(token))) return "权限不足";
+        if(!(tools.isTeacher(token)&&tools.isAdmin(token))) return "权限不足";
         if(attendService.delAttend(aid)) return aid;
         return "删除失败";
     }
@@ -148,7 +149,7 @@ public class amControllor {
     @RequestMapping("cancel")
     String cancel(HttpServletRequest httpServletRequest,String aid){
         String token = httpServletRequest.getHeader("token");
-        if(!(tools.isTeacher(token)||tools.isAdmin(token))) return "权限不足";
+        if(!(tools.isTeacher(token)&&tools.isAdmin(token))) return "权限不足";
         if(attendService.cancelAttend(aid)) return aid;
         return "取消失败";
     }
@@ -161,7 +162,7 @@ public class amControllor {
      * @return
      */
     @UserLoginToken
-    @RequestMapping("signIn")
+    @RequestMapping("signin")
     String signIn(String sid,String aid,int status){
         Date date = new Date();
         Attend attend = attendService.findAttendByAtno(aid);

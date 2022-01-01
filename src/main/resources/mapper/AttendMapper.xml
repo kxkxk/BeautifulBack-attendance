@@ -16,15 +16,14 @@
     <update id="updateAttendByAtno" parameterType="attend">
         update attend
 <trim prefix="SET" suffixOverrides=",">
-    <if test="Startdate != null">
-        startdate = #{startdate}
+    <if test="startdate != null">
+        startdate = #{startdate},
     </if><if test="enddate != null">
-    enddate = #{enddate}
+    enddate = #{enddate},
 </if><if test="remarks != null">
-    remarks = #{remarks}
+    remarks = #{remarks},
 </if>
-where atno = #{atno}
-</trim>
+</trim>where atno = #{atno}
     </update>
     <delete id="delAttendByAtno">
         delete from attend where Atno = #{atno}

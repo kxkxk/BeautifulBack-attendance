@@ -26,7 +26,7 @@
                 sname = #{sname},
             </if><if test="password != null">
             password = #{password},
-        </if><if test="Imgpath != null">
+        </if><if test="imgpath != null">
             imgpath = #{imgpath},
         </if><if test="mno != null">
             mno = #{mno},
@@ -51,7 +51,7 @@
         select (Sno,Sname,Imgpath,Mno) from students where Mno = #{mno}
     </select>
     <select id="selectStudentBySno" resultType="beautiful.back.bb.entry.Students">
-        select (Sno,Sname,Imgpath,Mno) from students where Sno = #{sno}
+        select * from students where Sno = #{sno}
     </select>
     <select id="selectImgpathBySno" resultType="java.lang.String">
         select Imgpath from students where Sno = #{sno}

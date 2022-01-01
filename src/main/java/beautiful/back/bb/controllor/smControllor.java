@@ -46,7 +46,7 @@ public class smControllor {
     Object login(String sno,String password,String wxid){
         JSONObject jsonObject=new JSONObject();
         String sid = studentsService.judgePassword(sno,password,wxid);
-        if(sid.equals("密码不对")) return sid;
+        if(sid.equals("密码不对")||sid.equals("账号错误")) return sid;
         String token = userService.getToken(userService.findStudentByID(sid));
         jsonObject.put("sid",sid);
         jsonObject.put("token",token);
@@ -78,7 +78,6 @@ public class smControllor {
      * @param password
      * @return
      */
-    //未测试
     @RequestMapping("register")
     String register(String sNum,String majorId,String name, String img, String password){
         String sid = tools.getUUID();
@@ -99,7 +98,6 @@ public class smControllor {
      * @param sid
      * @return
      */
-    //未测试
     @UserLoginToken
     @RequestMapping("info")
     Students Info(String sid){
@@ -111,7 +109,6 @@ public class smControllor {
      * @param sid
      * @return
      */
-    //未测试
     @UserLoginToken
     @RequestMapping("course")
     Object course(String sid){
@@ -135,7 +132,6 @@ public class smControllor {
      * @param sNum
      * @return
      */
-    //未测试
     @UserLoginToken
     @RequestMapping("numfind")
     boolean numFind(String sNum){
@@ -147,11 +143,9 @@ public class smControllor {
      * @param sid
      * @return
      */
-    //未测试
     @UserLoginToken
     @RequestMapping("remove")
     String remove(String sid, HttpServletRequest httpServletRequest){
-        //需要测试
         String token = httpServletRequest.getHeader("token");
         if(!tools.isAdmin(token))
             return "权限不足";
@@ -165,7 +159,6 @@ public class smControllor {
      * @param sid
      * @return
      */
-    //未测试
     @UserLoginToken
     @RequestMapping("attend")
     List<Map<Attend,Record>> attend(String sid){
@@ -180,7 +173,6 @@ public class smControllor {
         }
         return reslist;
     }
-//未测试
     /**
      * 编辑学生个人信息
      * @param sid
@@ -191,17 +183,22 @@ public class smControllor {
      * @return
      */
     @UserLoginToken
-    @RequestMapping("InfoEdit")
-    String InfoEdit(String sid,String sNum,String majorId,String name,String img,String token){
+    @RequestMapping("infoedit")
+    String InfoEdit(String sid,String sNum,String majorId,String name,String img,HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("token");
         Students students = new Students();
-        students.setSname(name);
-        students.setUuid(sid);
-        //不为空且请求权限为教师或管理员时才能更新学号照片地址和专业
-        if(!img.isEmpty() || !sNum.isEmpty() || !majorId.isEmpty() || tools.isAdmin(token) || tools.isTeacher(token)){
-            students.setImgpath(img);
-            students.setSno(sNum);
-            students.setMno(majorId);
+        if(!name.isEmpty()){
+            students.setSname(name);
         }
+        if(!sid.isEmpty()){
+            students.setUuid(sid);
+        }
+        //不为空且请求权限为教师或管理员时才能更新学号照片地址和专业
+        if(tools.isAdmin(token) || tools.isTeacher(token)){
+            if(!img.isEmpty()) students.setImgpath(img);
+            if(!sNum.isEmpty()) students.setSno(sNum);
+            if(!majorId.isEmpty()) students.setMno(majorId);
+        }else return "权限不足";
         if(studentsService.updateStudent(students))
             return sid;
         return  "更新失败";

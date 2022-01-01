@@ -46,8 +46,7 @@ public class tools {
     public static boolean isAdmin(String token){
         return decodeToken(token).equals("Admin");
     }
-    public static boolean isTeacher(String token){
-        return decodeToken(token).equals("Teacher");
+    public static boolean isTeacher(String token){ return decodeToken(token).equals("Teacher");
     }
     public static boolean isStudent(String token){
         return decodeToken(token).equals("Student");

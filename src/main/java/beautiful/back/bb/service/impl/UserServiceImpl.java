@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findAdminByID(String ID) {
         Admins admins = adminsMapper.selectAdminByAno(ID);
-        return new User(admins.getAno(),"Admin",admins.getAname());
+        return new User(admins.getAno(),"Admin",admins.getPassword());
     }
 
     @Override

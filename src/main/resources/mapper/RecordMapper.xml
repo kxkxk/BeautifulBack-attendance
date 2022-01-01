@@ -5,7 +5,7 @@
 <mapper namespace="beautiful.back.bb.mapper.RecordMapper">
 
     <insert id="insertRecord">
-        insert into record values (Atno=#{atno},sno=#{sno},date=#{date},type=#{type})
+        insert into record (Atno, Sno, Date, Type) values (#{atno},#{sno},#{date},#{type})
     </insert>
     <update id="updateTypeByAtnoAndSnoInt">
         update record set Type = #{type} where Atno = #{atno} and sno = #{sno}
